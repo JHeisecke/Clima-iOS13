@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
     
 
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -24,6 +24,12 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         weatherManager.delegate = self
     }
 
+}
+
+//MARK: - UITextFieldDelegate
+
+extension WeatherViewController : UITextFieldDelegate {
+ 
     @IBAction func doSearch(_ sender: Any) {
         if let name = searchBar.text {
             weatherManager.fetchWeather(city: name)
@@ -48,6 +54,12 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
             return false
         }
     }
+}
+
+//MARK: - WeatherManagerDelegate
+
+
+extension WeatherViewController : WeatherManagerDelegate {
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weatherData: WeatherModel) {
         DispatchQueue.main.async {
